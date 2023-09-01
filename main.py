@@ -5,14 +5,16 @@ keyword = input("직업을 입력 해주세요?")
 
 indeed = extract_indeed_jobs(keyword)
 wwr = extract_wwr_jobs(keyword)
-
 jobs = indeed + wwr
 
-for job in jobs:
-    print(job)
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+file = open(f"{keyword}.csv", "w", encoding="utf-8")
 
+file.write("직책,회사,위치,URL\n")
+
+for job in jobs:
+    file.write(f"{job['position'],job['company'],job['location'],job['link']}\n")
+
+file.close()
 
 while (True):
     pass
