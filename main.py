@@ -4,8 +4,9 @@ from extractors.wwr import extract_wwr_jobs
 from extractors.indeed import extract_indeed_jobs
 from file import save_to_file
 
-
 app = Flask("JobScrapper")
+
+db = {}
 
 @app.route("/")
 def home():
@@ -14,9 +15,13 @@ def home():
 @app.route("/search")
 def hello():
     keyword = request.args.get("keyword")
-    indeed = extract_indeed_jobs(keyword)
-    wwr = extract_wwr_jobs(keyword)
-    jobs = indeed + wwr
+    if keyword in db:
+        jobs = db[keyword]
+    else:
+        indeed = extract_indeed_jobs(keyword)
+        wwr = extract_wwr_jobs(keyword)
+        jobs = indeed + wwr
+        db[keyword] = jobs
     return render_template("search.html", keyword=keyword, jobs=jobs)
 
 app.run("127.0.0.1")
