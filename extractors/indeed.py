@@ -14,7 +14,7 @@ def get_page_count(keyword):
     if count >= 5:
         return 5
     else:
-        return count
+        return count + 1
 
 def extract_indeed_jobs(keyword):
     results = []
