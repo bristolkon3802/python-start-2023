@@ -4,3 +4,7 @@
 
     pip install flask
     pip3 install flask
+
+### Pico - HTML 기본 디자인
+
+    https://picocss.com/
